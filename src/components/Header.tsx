@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Menu, X, Grid3X3, Shield, Bell, LogOut, Settings } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, Grid3X3, Shield, Bell, LogOut, Settings, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -20,15 +20,12 @@ const Header = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#services" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+          <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             Dịch vụ
-          </a>
-          <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Yêu cầu của tôi
-          </a>
-          <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Hướng dẫn
-          </a>
+          </Link>
+          <Link to="/guide" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors flex items-center gap-1">
+            <HelpCircle className="w-3.5 h-3.5" /> Hướng dẫn
+          </Link>
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
@@ -67,9 +64,8 @@ const Header = () => {
       {mobileOpen && (
         <div className="absolute top-[70px] left-0 w-full bg-card shadow-lg md:hidden border-t border-border">
           <nav className="flex flex-col p-4 gap-3">
-            <a href="#services" className="text-sm font-medium text-muted-foreground hover:text-primary py-2">Dịch vụ</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary py-2">Yêu cầu của tôi</a>
-            <a href="#" className="text-sm font-medium text-muted-foreground hover:text-primary py-2">Hướng dẫn</a>
+            <Link to="/" className="text-sm font-medium text-muted-foreground hover:text-primary py-2" onClick={() => setMobileOpen(false)}>Dịch vụ</Link>
+            <Link to="/guide" className="text-sm font-medium text-muted-foreground hover:text-primary py-2" onClick={() => setMobileOpen(false)}>Hướng dẫn</Link>
             {isAdmin && (
               <Button variant="outline" size="sm" onClick={() => { navigate("/admin"); setMobileOpen(false); }}>
                 <Settings className="w-4 h-4 mr-1.5" />

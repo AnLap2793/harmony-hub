@@ -11,7 +11,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <HeroSection searchQuery={searchQuery} onSearchChange={setSearchQuery} />
-      <StatsBar />
       <ServiceCatalog searchQuery={searchQuery} />
 
       <footer className="border-t border-border py-6">

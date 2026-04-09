@@ -1,4 +1,4 @@
-import { ArrowRight, Lock, Clock, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { Eye, Lock, Clock, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import type { LucideIcon } from "lucide-react";
@@ -41,7 +41,6 @@ interface ServiceCardProps {
 const ServiceCard = ({ service, onOpen, className = "" }: ServiceCardProps) => {
   const config = statusConfig[service.status];
   const StatusIcon = config.icon;
-  const canOpen = service.status === "granted" || service.status === "expiring";
 
   return (
     <div
@@ -52,36 +51,28 @@ const ServiceCard = ({ service, onOpen, className = "" }: ServiceCardProps) => {
           <div className="w-11 h-11 rounded-lg bg-accent flex items-center justify-center shrink-0">
             <service.icon className="w-6 h-6 text-secondary" />
           </div>
-          <Badge variant={config.variant} className="text-xs gap-1">
+          <Badge variant={config.variant} className="text-[10px] gap-1 font-bold">
             <StatusIcon className="w-3 h-3" />
             {config.label}
           </Badge>
         </div>
 
         <h3 className="font-bold text-foreground mb-1.5 text-base">{service.name}</h3>
-        <p className="text-muted-foreground text-sm mb-3 line-clamp-2 flex-1">{service.description}</p>
+        <p className="text-muted-foreground text-sm mb-3 line-clamp-2 flex-1 leading-relaxed">{service.description}</p>
 
-        <span className="text-xs text-muted-foreground">
-          Phù hợp: <span className="font-medium text-foreground">{service.department}</span>
+        <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">
+          Phòng ban: <span className="text-foreground/80">{service.department}</span>
         </span>
       </div>
 
-      <div className="border-t border-border px-5 py-3">
+      <div className="border-t border-border px-5 py-3 bg-muted/20">
         <Button
-          variant={canOpen ? "default" : "outline"}
+          variant="outline"
           size="sm"
-          className="w-full gap-1.5"
+          className="w-full gap-2 font-bold text-xs border-primary/20 hover:bg-primary/5 hover:text-primary transition-all"
           onClick={() => onOpen(service)}
         >
-          {canOpen ? (
-            <>
-              Mở công cụ <ArrowRight className="w-4 h-4" />
-            </>
-          ) : (
-            <>
-              Yêu cầu quyền <Lock className="w-4 h-4" />
-            </>
-          )}
+          <Eye className="w-4 h-4" /> Xem chi tiết
         </Button>
       </div>
     </div>
